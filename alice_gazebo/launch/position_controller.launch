@@ -21,6 +21,8 @@
  							  r_ankle_roll_position
 							  waist_pitch_position
 							  waist_yaw_position
+                                                          head_pitch_position
+                                                          head_yaw_position
 							  "/>
 
 </launch>

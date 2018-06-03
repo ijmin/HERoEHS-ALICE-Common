@@ -121,10 +121,6 @@ alice_robot:
     joint: head_pitch
     pid: {p: 350.0, i: 0.1, d: 100.0}
 
-  head_roll_position:
-    type: effort_controllers/JointPositionController
-    joint: head_roll
-    pid: {p: 350.0, i: 0.1, d: 100.0}
 
 
 
