@@ -41,8 +41,6 @@
             </imu>
     </plugin>
   </gazebo>
-
-
   <!-- World -->
   <gazebo reference="world">
   </gazebo>

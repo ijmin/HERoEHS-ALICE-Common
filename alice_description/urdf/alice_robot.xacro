@@ -23,7 +23,7 @@
   </link>
 
   <joint name="base_fixed" type="fixed">
-    <origin xyz="0 0 0.7" rpy="0 0 0"/>
+    <origin xyz="0 0 0.57" rpy="0 0 0"/>
     <parent link="base"/>
     <child link="pelvis"/>
   </joint>
@@ -73,7 +73,7 @@
     <parent link="pelvis"/>
     <child link="waist_pitch_link"/>
     <origin xyz="0 0 0.20" rpy="0 0 0"/>
-    <axis xyz="0 1 0"/>
+    <axis xyz="0 -1 0"/>
     <limit velocity="6.5" effort="1000" lower="${-pi/2}" upper="${pi}" />
     <dynamics damping = "0.7"/>
   </joint>
@@ -116,7 +116,7 @@
     <parent link="waist_pitch_link"/>
     <child link="waist_yaw_link"/>
     <origin xyz="0 0 0.144" rpy="0 0 0"/>
-    <axis xyz="0 0 1"/>
+    <axis xyz="0 0 -1"/>
     <limit velocity="6.5" effort="1000" lower="${-pi/2}" upper="${pi}" />
     <dynamics damping = "0.7"/>
    </joint>
@@ -280,7 +280,7 @@
     <parent link="pelvis"/>
     <child link="l_hip_pitch_link"/>
     <origin xyz="0 0.034 0" rpy="0 0 0"/>
-    <axis xyz="0 1 0"/>
+    <axis xyz="0 -1 0"/>
     <limit velocity="6.5" effort="1000" lower="${-pi/2}" upper="${pi/2}" />
     <dynamics damping = "0.7"/>
   </joint>
@@ -325,7 +325,7 @@
     <parent link="l_hip_pitch_link"/>
     <child link="l_hip_roll_link"/>
     <origin xyz="0 0.056 0" rpy="0 0 0"/>
-    <axis xyz="1 0 0"/>
+    <axis xyz="-1 0 0"/>
     <limit velocity="6.5" effort="1000" lower="${-pi/2}" upper="${pi}" />
     <dynamics damping = "0.7"/>
   </joint>
@@ -413,7 +413,7 @@
     <parent link="l_hip_yaw_link"/>
     <child link="l_knee_pitch_link"/>
     <origin xyz="0 0 -0.104" rpy="0 0 0"/>
-    <axis xyz="0 1 0"/>
+    <axis xyz="0 -1 0"/>
     <limit velocity="6.5" effort="1000" lower="${-pi}" upper="${pi/2}" />
     <dynamics damping = "0.7"/>
   </joint>
@@ -542,7 +542,7 @@
   <joint name="l_last" type="fixed">
     <parent link="l_ankle_roll_link"/>
     <child link="l_foot_link"/>
-    <origin xyz="0 0 -0.1245" rpy="0 0 0"/>    
+    <origin xyz="0 0 -0.1245" rpy="0 0 0"/>   
   </joint>
 
   <link name="l_foot_link">
@@ -611,7 +611,7 @@
     <parent link="r_hip_pitch_link"/>
     <child link="r_hip_roll_link"/>
     <origin xyz="0 -0.056 0" rpy="0 0 0"/>
-    <axis xyz="1 0 0"/>
+    <axis xyz="-1 0 0"/>
     <limit velocity="6.5" effort="1000" lower="${-pi}" upper="${pi/2}" />
     <dynamics damping = "0.7"/>
   </joint>
@@ -746,7 +746,7 @@
     <parent link="r_knee_pitch_link"/>
     <child link="r_ankle_pitch_link"/>
     <origin xyz="0 0 -0.240" rpy="0 0 0"/>
-    <axis xyz="0 1 0"/>
+    <axis xyz="0 -1 0"/>
     <limit velocity="6.5" effort="1000" lower="${-pi/2}" upper="${pi/2}" />
     <dynamics damping = "0.7"/>
   </joint>
