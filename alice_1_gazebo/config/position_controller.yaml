@@ -1,0 +1,97 @@
+alice_1_robot:
+  # Publish all joint states -----------------------------------
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 125  
+  
+  # Position Controllers ---------------------------------------
+  # left leg ---------------------------------------
+  l_hip_pitch_position:
+    type: effort_controllers/JointPositionController
+    joint: pelvis_pitch_l
+    pid: {p: 9000.0, i: 0, d: 800}
+
+  l_hip_roll_position:
+    type: effort_controllers/JointPositionController
+    joint: pelvis_roll_l
+    pid: {p: 9000.0, i: 0, d: 800}
+
+  l_hip_yaw_position:
+    type: effort_controllers/JointPositionController
+    joint: pelvis_yaw_l
+    pid: {p: 9000.0, i: 0, d: 800}
+
+  l_knee_pitch_position:
+    type: effort_controllers/JointPositionController
+    joint: leg_knee_l
+    pid: {p: 9000.0, i: 0, d: 800}
+
+  l_ankle_pitch_position:
+    type: effort_controllers/JointPositionController
+    joint: leg_ankle_p_l
+    pid: {p: 9000.0, i: 0, d: 800}
+
+  l_ankle_roll_position:
+    type: effort_controllers/JointPositionController
+    joint: leg_ankle_r_l
+    pid: {p: 9000.0, i: 0, d: 800}
+
+  # right leg ---------------------------------------
+  r_hip_pitch_position:
+    type: effort_controllers/JointPositionController
+    joint: pelvis_pitch_r
+    pid: {p: 9000.0, i: 0, d: 800}
+
+  r_hip_roll_position:
+    type: effort_controllers/JointPositionController
+    joint: pelvis_roll_r
+    pid: {p: 9000.0, i: 0, d: 800}
+
+  r_hip_yaw_position:
+    type: effort_controllers/JointPositionController
+    joint: pelvis_yaw_r
+    pid: {p: 9000.0, i: 0, d: 800}
+
+  r_knee_pitch_position:
+    type: effort_controllers/JointPositionController
+    joint: leg_knee_r
+    pid: {p: 9000.0, i: 0, d: 800}
+
+  r_ankle_pitch_position:
+    type: effort_controllers/JointPositionController
+    joint: leg_ankle_p_r
+    pid: {p: 9000.0, i: 0, d: 800}
+
+  r_ankle_roll_position:
+    type: effort_controllers/JointPositionController
+    joint: leg_ankle_r_r
+    pid: {p: 9000.0, i: 0, d: 800} 
+# Head ---------------------------------------
+  head_pitch_position:
+    type: effort_controllers/JointPositionController
+    joint: head_pitch
+    pid: {p: 7500.0, i: 0.1, d: 100.0} 
+
+  head_yaw_position:
+    type: effort_controllers/JointPositionController
+    joint: head_yaw
+    pid: {p: 7500.0, i: 0.1, d: 100.0} 
+
+
+# arm ---------------------------------------
+
+  l_shoulder_pitch_position:
+    type: effort_controllers/JointPositionController
+    joint: l_shoulder_pitch
+    pid: {p: 7500.0, i: 0.1, d: 100.0} 
+
+  r_shoulder_pitch_position:
+    type: effort_controllers/JointPositionController
+    joint: r_shoulder_pitch
+    pid: {p: 7500.0, i: 0.1, d: 100.0} 
+
+
+
+
+
+

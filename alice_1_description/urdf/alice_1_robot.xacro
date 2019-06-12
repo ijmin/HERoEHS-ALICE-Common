@@ -1,0 +1,874 @@
+<?xml version="1.0"?>
+
+<robot name="alice_1_robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:property name="pi" value="3.141592654" />
+   <!-- Import all Gazebo-customization elements, including Gazebo colors -->
+  <xacro:include filename="$(find alice_1_description)/urdf/soccer_gazebo.gazebo" />
+  <xacro:include filename="$(find alice_1_description)/urdf/materials.xacro" />
+
+  <!-- Used for fixing robot -->
+<!--
+  <link name="world">
+  </link>
+
+  <joint name="world_fixed" type="fixed">
+    <origin xyz="0 0 0.7" rpy="0 0 0"/>
+    <parent link="world"/>
+    <child link="pelvis"/>
+  </joint>
+-->
+
+  <link name="base">
+  </link>
+
+  <joint name="base_fixed" type="fixed">
+    <origin xyz="0 0 0.7" rpy="0 0 0"/>
+    <parent link="base"/>
+    <child link="pelvis_waist"/>
+  </joint>
+
+  <!-- pelvis -->
+
+  <link name="pelvis_waist">
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.01 0.01 0.01" />
+      </geometry>
+    </collision>
+
+    <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://alice_1_description/meshes/asm_hum_fb_3_main.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+        <material name="red"/>
+    </visual>
+
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>      
+      <mass value="10"/>
+      <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />      
+    </inertial>
+  </link>
+
+
+
+<!-- chest --> 
+<!--
+  <joint name="chest" type="fixed">
+    <parent link="pelvis_waist"/>
+    <child link="chest_fixed"/>
+    <origin xyz="0 0 0.352" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit velocity="6.5" effort="1000" lower="${-pi/2}" upper="${pi}" />
+    <dynamics damping = "0.7"/>
+  </joint>
+
+  <link name="chest_fixed">
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+          <mesh filename="package://alice_1_description/meshes/prt_hum_fb_3_body_fake.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+    </collision>
+
+    <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://alice_1_description/meshes/prt_hum_fb_3_body_fake.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+        <material name="red"/>
+    </visual>
+
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>      
+      <mass value="1"/>
+      <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />      
+    </inertial>
+  </link>
+--> 
+<!-- head -->
+
+<joint name="head_yaw" type="revolute">
+    <parent link="pelvis_waist"/>
+    <child link="head_yaw_link"/>
+    <origin xyz="0 0 0.4665" rpy="0 0 0"/>
+    <axis xyz="0 0 1"/>
+    <limit velocity="6.5" effort="1000" lower="${-pi/2}" upper="${pi}" />
+    <dynamics damping = "0.7"/>
+  </joint>
+
+ <transmission name="head_yaw_tran">
+     <type>transmission_interface/SimpleTransmission</type>
+     <joint name="head_yaw">
+       <hardwareInterface>EffortJointInterface</hardwareInterface>
+     </joint>
+     <actuator name="head_yaw_motor">
+       <hardwareInterface>EffortJointInterface</hardwareInterface>
+       <mechanicalReduction>1</mechanicalReduction>
+     </actuator>
+  </transmission>
+
+  <link name="head_yaw_link">
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+          <mesh filename="package://alice_1_description/meshes/asm_hum_fb_3_head_y1.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+    </collision>
+
+    <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://alice_1_description/meshes/asm_hum_fb_3_head_y1.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+        <material name="red"/>
+    </visual>
+
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>      
+      <mass value="0.1"/>
+      <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />      
+    </inertial>
+  </link>
+
+<joint name="head_pitch" type="revolute">
+    <parent link="head_yaw_link"/>
+    <child link="head_pitch_link"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit velocity="6.5" effort="1000" lower="${-pi/2}" upper="${pi}" />
+    <dynamics damping = "0.7"/>
+  </joint>
+
+  <transmission name="head_pitch_tran">
+     <type>transmission_interface/SimpleTransmission</type>
+     <joint name="head_pitch">
+       <hardwareInterface>EffortJointInterface</hardwareInterface>
+     </joint>
+     <actuator name="head_pitch_motor">
+       <hardwareInterface>EffortJointInterface</hardwareInterface>
+       <mechanicalReduction>1</mechanicalReduction>
+     </actuator>
+  </transmission>
+
+  <link name="head_pitch_link">
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+          <mesh filename="package://alice_1_description/meshes/asm_hum_fb_3_head_y1.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+    </collision>
+
+    <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://alice_1_description/meshes/asm_hum_fb_3_head_y1.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+        <material name="red"/>
+    </visual>
+
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>      
+      <mass value="0.1"/>
+      <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />      
+    </inertial>
+  </link>
+<!-- fake head -->
+
+<joint name="head" type="fixed">
+    <parent link="head_pitch_link"/>
+    <child link="head_fake_link"/>
+    <origin xyz="0 0 0.13" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit velocity="6.5" effort="1000" lower="${-pi/2}" upper="${pi}" />
+    <dynamics damping = "0.7"/>
+  </joint>
+
+
+
+  <link name="head_fake_link">
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+          <mesh filename="package://alice_1_description/meshes/prt_hum_fb_3_body_fake.stl" scale="0.0005 0.0005 0.0005"/>
+        </geometry>
+    </collision>
+
+    <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://alice_1_description/meshes/prt_hum_fb_3_body_fake.stl" scale="0.0005 0.0005 0.0005"/>
+        </geometry>
+        <material name="red"/>
+    </visual>
+
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>      
+      <mass value="0.1"/>
+      <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />      
+    </inertial>
+  </link>
+
+<joint name="camera_zed" type="fixed">
+    <parent link="head_fake_link"/>
+    <child link="camera_zed_link"/>
+    <origin xyz="0.1 0.0 0" rpy="0 0 0"/>
+  </joint>
+
+  <link name="camera_zed_link">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>      
+      <mass value="0"/>
+      <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />      
+    </inertial>
+  </link>
+
+<!-- l_shoulder_pitch --> 
+
+  <joint name="l_shoulder_pitch" type="revolute">
+    <parent link="head_pitch_link"/>
+    <child link="l_shoulder_pitch_link"/>
+    <origin xyz="0 0.17 -0.0565" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit velocity="6.5" effort="1000" lower="${-pi/2}" upper="${pi}" />
+    <dynamics damping = "0.7"/>
+  </joint>
+
+  <transmission name="l_shoulder_pitch_tran">
+     <type>transmission_interface/SimpleTransmission</type>
+     <joint name="l_shoulder_pitch">
+       <hardwareInterface>EffortJointInterface</hardwareInterface>
+     </joint>
+     <actuator name="l_shoulder_pitch_motor">
+       <hardwareInterface>EffortJointInterface</hardwareInterface>
+       <mechanicalReduction>1</mechanicalReduction>
+     </actuator>
+  </transmission>
+
+  <link name="l_shoulder_pitch_link">
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+          <mesh filename="package://alice_1_description/meshes/asm_hum_fb_3_shr_l1.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+    </collision>
+
+    <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://alice_1_description/meshes/asm_hum_fb_3_shr_l1.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+        <material name="red"/>
+    </visual>
+
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>      
+      <mass value="1"/>
+      <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />      
+    </inertial>
+  </link>
+
+<!-- r_shoulder_pitch --> 
+
+ <joint name="r_shoulder_pitch" type="revolute">
+    <parent link="head_pitch_link"/>
+    <child link="r_shoulder_pitch_link"/>
+    <origin xyz="0 -0.17 -0.0565" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit velocity="6.5" effort="1000" lower="${-pi/2}" upper="${pi}" />
+    <dynamics damping = "0.7"/>
+  </joint>
+
+  <transmission name="r_shoulder_pitch_tran">
+     <type>transmission_interface/SimpleTransmission</type>
+     <joint name="r_shoulder_pitch">
+       <hardwareInterface>EffortJointInterface</hardwareInterface>
+     </joint>
+     <actuator name="r_shoulder_pitch_motor">
+       <hardwareInterface>EffortJointInterface</hardwareInterface>
+       <mechanicalReduction>1</mechanicalReduction>
+     </actuator>
+  </transmission>
+
+  <link name="r_shoulder_pitch_link">
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+          <mesh filename="package://alice_1_description/meshes/asm_hum_fb_3_shr_r1.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+    </collision>
+
+    <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://alice_1_description/meshes/asm_hum_fb_3_shr_r1.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+        <material name="red"/>
+    </visual>
+
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>      
+      <mass value="1"/>
+      <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />      
+    </inertial>
+  </link>
+
+
+<!-- left_leg --> 
+
+  <joint name="pelvis_pitch_l" type="revolute">
+    <parent link="pelvis_waist"/>
+    <child link="pelvis_l1"/>
+    <origin xyz="0 0.021 0" rpy="0 0 0"/>
+    <axis xyz="0 -1 0"/>
+    <limit velocity="6.5" effort="1000" lower="${-pi/2}" upper="${pi}" />
+    <dynamics damping = "0.7"/>
+  </joint>
+
+  <transmission name="pelvis_pitch_l_tran">
+     <type>transmission_interface/SimpleTransmission</type>
+     <joint name="pelvis_pitch_l">
+       <hardwareInterface>EffortJointInterface</hardwareInterface>
+     </joint>
+     <actuator name="pelvis_pitch_l_motor">
+       <hardwareInterface>EffortJointInterface</hardwareInterface>
+       <mechanicalReduction>1</mechanicalReduction>
+     </actuator>
+  </transmission>
+
+  <link name="pelvis_l1">
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+          <mesh filename="package://alice_1_description/meshes/asm_hum_fb_3_pelvis_l_p1.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+    </collision>
+
+    <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://alice_1_description/meshes/asm_hum_fb_3_pelvis_l_p1.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+        <material name="red"/>
+    </visual>
+
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>      
+      <mass value="1"/>
+      <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />      
+    </inertial>
+  </link>
+
+  <joint name="pelvis_roll_l" type="revolute">
+    <parent link="pelvis_l1"/>
+    <child link="pelvis_l2"/>
+    <origin xyz="0 0.059 0" rpy="0 0 0"/>
+    <axis xyz="-1 0 0"/>
+    <limit velocity="6.5" effort="1000" lower="${-pi/2}" upper="${pi}" />
+    <dynamics damping = "0.7"/>
+  </joint>
+
+  <transmission name="pelvis_roll_l_tran">
+     <type>transmission_interface/SimpleTransmission</type>
+     <joint name="pelvis_roll_l">
+       <hardwareInterface>EffortJointInterface</hardwareInterface>
+     </joint>
+     <actuator name="pelvis_roll_l_motor">
+       <hardwareInterface>EffortJointInterface</hardwareInterface>
+       <mechanicalReduction>1</mechanicalReduction>
+     </actuator>
+  </transmission>
+
+   <link name="pelvis_l2">
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+          <mesh filename="package://alice_1_description/meshes/asm_hum_fb_3_pelvis_l_r1.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+    </collision>
+
+    <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://alice_1_description/meshes/asm_hum_fb_3_pelvis_l_r1.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+        <material name="red"/>
+    </visual>
+
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>      
+      <mass value="1"/>
+      <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />      
+    </inertial>
+  </link>
+
+  <joint name="pelvis_yaw_l" type="revolute">
+    <parent link="pelvis_l2"/>
+    <child link="leg_l1"/>
+    <origin xyz="0 0 -0.110" rpy="0 0 0"/>
+    <axis xyz="0 0 1"/>
+    <limit velocity="6.5" effort="1000" lower="${-pi/2}" upper="${pi}" />
+    <dynamics damping = "0.7"/>
+  </joint>
+
+    <transmission name="pelvis_yaw_l_tran">
+     <type>transmission_interface/SimpleTransmission</type>
+     <joint name="pelvis_yaw_l">
+       <hardwareInterface>EffortJointInterface</hardwareInterface>
+     </joint>
+     <actuator name="pelvis_yaw_l_motor">
+       <hardwareInterface>EffortJointInterface</hardwareInterface>
+       <mechanicalReduction>1</mechanicalReduction>
+     </actuator>
+  </transmission>
+
+   <link name="leg_l1">
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+          <mesh filename="package://alice_1_description/meshes/asm_hum_fb_3_pelvis_l_y1.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+    </collision>
+
+    <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://alice_1_description/meshes/asm_hum_fb_3_pelvis_l_y1.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+        <material name="red"/>
+    </visual>
+
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>      
+      <mass value="1"/>
+      <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />      
+    </inertial>
+  </link>
+
+  <joint name="leg_knee_l" type="revolute">
+    <parent link="leg_l1"/>
+    <child link="leg_l2"/>
+    <origin xyz="0 0 -0.170" rpy="0 0 0"/>
+    <axis xyz="0 -1 0"/>
+    <limit velocity="6.5" effort="1000" lower="${-pi/2}" upper="${pi}" />
+    <dynamics damping = "0.7"/>
+  </joint>
+
+   <transmission name="leg_knee_l_tran">
+     <type>transmission_interface/SimpleTransmission</type>
+     <joint name="leg_knee_l">
+       <hardwareInterface>EffortJointInterface</hardwareInterface>
+     </joint>
+     <actuator name="leg_knee_l_motor">
+       <hardwareInterface>EffortJointInterface</hardwareInterface>
+       <mechanicalReduction>1</mechanicalReduction>
+     </actuator>
+  </transmission>
+
+   <link name="leg_l2">
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+          <mesh filename="package://alice_1_description/meshes/asm_hum_fb_3_leg_l_p1.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+    </collision>
+
+    <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://alice_1_description/meshes/asm_hum_fb_3_leg_l_p1.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+        <material name="red"/>
+    </visual>
+
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>      
+      <mass value="1"/>
+      <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />      
+    </inertial>
+  </link>
+
+  <joint name="leg_ankle_p_l" type="revolute">
+    <parent link="leg_l2"/>
+    <child link="leg_ankle_l1"/>
+    <origin xyz="0 0 -0.28" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit velocity="6.5" effort="1000" lower="${-pi/2}" upper="${pi}" />
+    <dynamics damping = "0.7"/>
+  </joint>
+
+  <transmission name="leg_ankle_p_l_tran">
+     <type>transmission_interface/SimpleTransmission</type>
+     <joint name="leg_ankle_p_l">
+       <hardwareInterface>EffortJointInterface</hardwareInterface>
+     </joint>
+     <actuator name="leg_ankle_p_l_motor">
+       <hardwareInterface>EffortJointInterface</hardwareInterface>
+       <mechanicalReduction>1</mechanicalReduction>
+     </actuator>
+  </transmission>
+
+   <link name="leg_ankle_l1">
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+          <mesh filename="package://alice_1_description/meshes/asm_hum_fb_3_ank_l_p1.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+    </collision>
+
+    <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://alice_1_description/meshes/asm_hum_fb_3_ank_l_p1.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+        <material name="red"/>
+    </visual>
+
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>      
+      <mass value="1"/>
+      <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />      
+    </inertial>
+  </link>
+
+  <joint name="leg_ankle_r_l" type="revolute">
+    <parent link="leg_ankle_l1"/>
+    <child link="leg_ankle_l2"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <limit velocity="6.5" effort="1000" lower="${-pi/2}" upper="${pi}" />
+    <dynamics damping = "0.7"/>
+  </joint>
+
+  <transmission name="leg_ankle_r_l_tran">
+     <type>transmission_interface/SimpleTransmission</type>
+     <joint name="leg_ankle_r_l">
+       <hardwareInterface>EffortJointInterface</hardwareInterface>
+     </joint>
+     <actuator name="leg_ankle_r_l_motor">
+       <hardwareInterface>EffortJointInterface</hardwareInterface>
+       <mechanicalReduction>1</mechanicalReduction>
+     </actuator>
+  </transmission>
+
+   <link name="leg_ankle_l2">
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+       <geometry>
+          <mesh filename="package://alice_1_description/meshes/asm_hum_fb_3_ank_l_r1.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+
+       <surface>
+        <friction>
+          <ode>
+            <mu>100</mu>
+            <mu2>50</mu2>
+          </ode>
+        </friction>
+      </surface>
+    </collision>
+
+    <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://alice_1_description/meshes/asm_hum_fb_3_ank_l_r1.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+        <material name="red"/>
+    </visual>
+
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>      
+      <mass value="10"/>
+      <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />      
+    </inertial>
+  </link>
+
+<!-- right -->
+
+  <joint name="pelvis_pitch_r" type="revolute">
+    <parent link="pelvis_waist"/>
+    <child link="pelvis_r1"/>
+    <origin xyz="0 -0.021 0" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit velocity="6.5" effort="1000" lower="${-pi/2}" upper="${pi}" />
+    <dynamics damping = "0.7"/>
+  </joint>
+
+    <transmission name="pelvis_pitch_r_tran">
+     <type>transmission_interface/SimpleTransmission</type>
+     <joint name="pelvis_pitch_r">
+       <hardwareInterface>EffortJointInterface</hardwareInterface>
+     </joint>
+     <actuator name="pelvis_pitch_r_motor">
+       <hardwareInterface>EffortJointInterface</hardwareInterface>
+       <mechanicalReduction>1</mechanicalReduction>
+     </actuator>
+  </transmission>
+
+  <link name="pelvis_r1">
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+          <mesh filename="package://alice_1_description/meshes/asm_hum_fb_3_pelvis_r_p1.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+    </collision>
+
+    <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://alice_1_description/meshes/asm_hum_fb_3_pelvis_r_p1.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+        <material name="red"/>
+    </visual>
+
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>      
+      <mass value="1"/>
+      <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />      
+    </inertial>
+  </link>
+
+  <joint name="pelvis_roll_r" type="revolute">
+    <parent link="pelvis_r1"/>
+    <child link="pelvis_r2"/>
+    <origin xyz="0 -0.059 0" rpy="0 0 0"/>
+    <axis xyz="-1 0 0"/>
+    <limit velocity="6.5" effort="1000" lower="${-pi/2}" upper="${pi}" />
+    <dynamics damping = "0.7"/>
+  </joint>
+
+  <transmission name="pelvis_roll_r_tran">
+     <type>transmission_interface/SimpleTransmission</type>
+     <joint name="pelvis_roll_r">
+       <hardwareInterface>EffortJointInterface</hardwareInterface>
+     </joint>
+     <actuator name="pelvis_roll_r_motor">
+       <hardwareInterface>EffortJointInterface</hardwareInterface>
+       <mechanicalReduction>1</mechanicalReduction>
+     </actuator>
+  </transmission>
+
+   <link name="pelvis_r2">
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+          <mesh filename="package://alice_1_description/meshes/asm_hum_fb_3_pelvis_r_r1.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+    </collision>
+
+    <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://alice_1_description/meshes/asm_hum_fb_3_pelvis_r_r1.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+        <material name="red"/>
+    </visual>
+
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>      
+      <mass value="1"/>
+      <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />      
+    </inertial>
+  </link>
+
+  <joint name="pelvis_yaw_r" type="revolute">
+    <parent link="pelvis_r2"/>
+    <child link="leg_r1"/>
+    <origin xyz="0 0 -0.110" rpy="0 0 0"/>
+    <axis xyz="0 0 1"/>
+    <limit velocity="6.5" effort="1000" lower="${-pi/2}" upper="${pi}" />
+    <dynamics damping = "0.7"/>
+  </joint>
+
+  <transmission name="pelvis_yaw_r_tran">
+     <type>transmission_interface/SimpleTransmission</type>
+     <joint name="pelvis_yaw_r">
+       <hardwareInterface>EffortJointInterface</hardwareInterface>
+     </joint>
+     <actuator name="pelvis_yaw_r_motor">
+       <hardwareInterface>EffortJointInterface</hardwareInterface>
+       <mechanicalReduction>1</mechanicalReduction>
+     </actuator>
+  </transmission>
+
+   <link name="leg_r1">
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+          <mesh filename="package://alice_1_description/meshes/asm_hum_fb_3_pelvis_r_y1.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+    </collision>
+
+    <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://alice_1_description/meshes/asm_hum_fb_3_pelvis_r_y1.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+        <material name="red"/>
+    </visual>
+
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>      
+      <mass value="1"/>
+      <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />      
+    </inertial>
+  </link>
+
+  <joint name="leg_knee_r" type="revolute">
+    <parent link="leg_r1"/>
+    <child link="leg_r2"/>
+    <origin xyz="0 0 -0.17" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit velocity="6.5" effort="1000" lower="${-pi/2}" upper="${pi}" />
+    <dynamics damping = "0.7"/>
+  </joint>
+
+   <transmission name="leg_knee_r_tran">
+     <type>transmission_interface/SimpleTransmission</type>
+     <joint name="leg_knee_r">
+       <hardwareInterface>EffortJointInterface</hardwareInterface>
+     </joint>
+     <actuator name="leg_knee_r_motor">
+       <hardwareInterface>EffortJointInterface</hardwareInterface>
+       <mechanicalReduction>1</mechanicalReduction>
+     </actuator>
+  </transmission>
+
+   <link name="leg_r2">
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+          <mesh filename="package://alice_1_description/meshes/asm_hum_fb_3_leg_r_p1.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+    </collision>
+
+    <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://alice_1_description/meshes/asm_hum_fb_3_leg_r_p1.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+        <material name="red"/>
+    </visual>
+
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>      
+      <mass value="1"/>
+      <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />      
+    </inertial>
+  </link>
+
+  <joint name="leg_ankle_p_r" type="revolute">
+    <parent link="leg_r2"/>
+    <child link="leg_ankle_r1"/>
+    <origin xyz="0 0 -0.28" rpy="0 0 0"/>
+    <axis xyz="0 -1 0"/>
+    <limit velocity="6.5" effort="1000" lower="${-pi/2}" upper="${pi}" />
+    <dynamics damping = "0.7"/>
+  </joint>
+
+  <transmission name="leg_ankle_p_r_tran">
+     <type>transmission_interface/SimpleTransmission</type>
+     <joint name="leg_ankle_p_r">
+       <hardwareInterface>EffortJointInterface</hardwareInterface>
+     </joint>
+     <actuator name="leg_ankle_p_r_motor">
+       <hardwareInterface>EffortJointInterface</hardwareInterface>
+       <mechanicalReduction>1</mechanicalReduction>
+     </actuator>
+  </transmission>
+
+   <link name="leg_ankle_r1">
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+          <mesh filename="package://alice_1_description/meshes/asm_hum_fb_3_ank_r_p1.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+    </collision>
+
+    <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://alice_1_description/meshes/asm_hum_fb_3_ank_r_p1.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+        <material name="red"/>
+    </visual>
+
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>      
+      <mass value="1"/>
+      <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />      
+    </inertial>
+  </link>
+
+  <joint name="leg_ankle_r_r" type="revolute">
+    <parent link="leg_ankle_r1"/>
+    <child link="leg_ankle_r2"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <limit velocity="6.5" effort="1000" lower="${-pi/2}" upper="${pi/2}" />
+    <dynamics damping = "0.7"/>
+  </joint>
+
+    <transmission name="leg_ankle_r_r_tran">
+     <type>transmission_interface/SimpleTransmission</type>
+     <joint name="leg_ankle_r_r">
+       <hardwareInterface>EffortJointInterface</hardwareInterface>
+     </joint>
+     <actuator name="leg_ankle_r_r_motor">
+       <hardwareInterface>EffortJointInterface</hardwareInterface>
+       <mechanicalReduction>1</mechanicalReduction>
+     </actuator>
+  </transmission>
+
+   <link name="leg_ankle_r2">
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+       <geometry>
+          <mesh filename="package://alice_1_description/meshes/asm_hum_fb_3_ank_r_r1.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+    <surface>
+        <friction>
+          <ode>
+            <mu>100</mu>
+            <mu2>50</mu2>
+          </ode>
+        </friction>
+      </surface>
+    </collision>
+
+    <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://alice_1_description/meshes/asm_hum_fb_3_ank_r_r1.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+        <material name="red"/>
+    </visual>
+
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>      
+      <mass value="10"/>
+      <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />      
+    </inertial>
+  </link>
+  
+
+  <joint name="imu_fixed" type="fixed">
+    <parent link="pelvis_waist"/>
+    <child link="imu_link"/>
+    <origin xyz="0.0 0.0 0" rpy="0 0 0"/>
+  </joint>
+
+  <link name="imu_link">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>      
+      <mass value="0"/>
+      <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />      
+    </inertial>
+  </link>
+</robot>
+
+
+

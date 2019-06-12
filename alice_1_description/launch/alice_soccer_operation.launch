@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+
+<launch>
+    <!-- Robot Model -->
+    <param name="robot_description"
+    command="$(find xacro)/xacro.py '$(find alice_1_description)/urdf/alice_1_robot.xacro'" />
+
+    <!-- Show joint values -->
+    <!--<node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+        <param name="use_gui" value="TRUE"/>
+        <remap from="/joint_states" to="/operation/diana_soccer/joint_states" />
+        <rosparam param="source_list">["/heroehs/diana_soccer/joint_states"]</rosparam>
+    </node> -->
+
+    <!-- Show in Rviz -->
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find alice_1_description)/launch/alice_soccer.rviz" output="screen"/>
+
+</launch>
