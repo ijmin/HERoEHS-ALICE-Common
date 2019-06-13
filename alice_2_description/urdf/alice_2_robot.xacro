@@ -123,6 +123,20 @@
     </inertial>
   </link>
 
+<joint name="camera_zed" type="fixed">
+    <parent link="head_fixed"/>
+    <child link="camera_zed_link"/>
+    <origin xyz="0.1 0.0 0" rpy="0 0 0"/>
+  </joint>
+
+  <link name="camera_zed_link">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>      
+      <mass value="0"/>
+      <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />      
+    </inertial>
+  </link>
+
 
 <!-- left_leg --> 
 

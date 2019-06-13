@@ -15,8 +15,8 @@
       <camera name="head">
         <horizontal_fov>1.3962634</horizontal_fov>
         <image>
-          <width>400</width>
-          <height>400</height>
+          <width>672</width>
+          <height>376</height>
           <format>R8G8B8</format>
         </image>
         <clip>
@@ -58,7 +58,7 @@
       <gaussianNoise>0.0</gaussianNoise>
       <xyzOffset>0 0 0</xyzOffset>
       <rpyOffset>0 0 0</rpyOffset>
-      <frameName>pelvis_waist</frameName>
+      <frameName>imu_link</frameName>
       <updateRate>130.0</updateRate>
       <imu>
 <!-- 
