@@ -8,63 +8,63 @@ alice_1_robot:
   # left leg ---------------------------------------
   l_hip_pitch_position:
     type: effort_controllers/JointPositionController
-    joint: pelvis_pitch_l
+    joint: l_hip_pitch
     pid: {p: 9000.0, i: 0, d: 800}
 
   l_hip_roll_position:
     type: effort_controllers/JointPositionController
-    joint: pelvis_roll_l
+    joint: l_hip_roll
     pid: {p: 9000.0, i: 0, d: 800}
 
   l_hip_yaw_position:
     type: effort_controllers/JointPositionController
-    joint: pelvis_yaw_l
+    joint: l_hip_yaw
     pid: {p: 9000.0, i: 0, d: 800}
 
   l_knee_pitch_position:
     type: effort_controllers/JointPositionController
-    joint: leg_knee_l
+    joint: l_knee_pitch
     pid: {p: 9000.0, i: 0, d: 800}
 
   l_ankle_pitch_position:
     type: effort_controllers/JointPositionController
-    joint: leg_ankle_p_l
+    joint: l_ankle_pitch
     pid: {p: 9000.0, i: 0, d: 800}
 
   l_ankle_roll_position:
     type: effort_controllers/JointPositionController
-    joint: leg_ankle_r_l
+    joint: l_ankle_roll
     pid: {p: 9000.0, i: 0, d: 800}
 
   # right leg ---------------------------------------
   r_hip_pitch_position:
     type: effort_controllers/JointPositionController
-    joint: pelvis_pitch_r
+    joint: r_hip_pitch
     pid: {p: 9000.0, i: 0, d: 800}
 
   r_hip_roll_position:
     type: effort_controllers/JointPositionController
-    joint: pelvis_roll_r
+    joint: r_hip_roll
     pid: {p: 9000.0, i: 0, d: 800}
 
   r_hip_yaw_position:
     type: effort_controllers/JointPositionController
-    joint: pelvis_yaw_r
+    joint: r_hip_yaw
     pid: {p: 9000.0, i: 0, d: 800}
 
   r_knee_pitch_position:
     type: effort_controllers/JointPositionController
-    joint: leg_knee_r
+    joint: r_knee_pitch
     pid: {p: 9000.0, i: 0, d: 800}
 
   r_ankle_pitch_position:
     type: effort_controllers/JointPositionController
-    joint: leg_ankle_p_r
+    joint: r_ankle_pitch
     pid: {p: 9000.0, i: 0, d: 800}
 
   r_ankle_roll_position:
     type: effort_controllers/JointPositionController
-    joint: leg_ankle_r_r
+    joint: r_ankle_roll
     pid: {p: 9000.0, i: 0, d: 800} 
 # Head ---------------------------------------
   head_pitch_position:
