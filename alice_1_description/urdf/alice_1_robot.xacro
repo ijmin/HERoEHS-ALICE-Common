@@ -94,7 +94,7 @@
 <joint name="head_yaw" type="revolute">
     <parent link="pelvis_waist"/>
     <child link="head_yaw_link"/>
-    <origin xyz="0 0 0.4665" rpy="0 0 0"/>
+    <origin xyz="0 0 0.4435" rpy="0 0 0"/>
     <axis xyz="0 0 1"/>
     <limit velocity="6.5" effort="1000" lower="${-pi/2}" upper="${pi}" />
     <dynamics damping = "0.7"/>
@@ -137,7 +137,7 @@
 <joint name="head_pitch" type="revolute">
     <parent link="head_yaw_link"/>
     <child link="head_pitch_link"/>
-    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <origin xyz="0 0 0.023" rpy="0 0 0"/>
     <axis xyz="0 1 0"/>
     <limit velocity="6.5" effort="1000" lower="${-pi/2}" upper="${pi}" />
     <dynamics damping = "0.7"/>
@@ -158,14 +158,14 @@
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-          <mesh filename="package://alice_1_description/meshes/asm_hum_fb_3_head_y1.stl" scale="0.001 0.001 0.001"/>
+          <mesh filename="package://alice_1_description/meshes/asm_hum_fb_3_head_p1.stl" scale="0.001 0.001 0.001"/>
         </geometry>
     </collision>
 
     <visual>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
-          <mesh filename="package://alice_1_description/meshes/asm_hum_fb_3_head_y1.stl" scale="0.001 0.001 0.001"/>
+          <mesh filename="package://alice_1_description/meshes/asm_hum_fb_3_head_p1.stl" scale="0.001 0.001 0.001"/>
         </geometry>
         <material name="red"/>
     </visual>
@@ -181,7 +181,7 @@
 <joint name="head" type="fixed">
     <parent link="head_pitch_link"/>
     <child link="head_fake_link"/>
-    <origin xyz="0 0 0.13" rpy="0 0 0"/>
+    <origin xyz="0 0 0.16" rpy="0 0 0"/>
     <axis xyz="0 1 0"/>
     <limit velocity="6.5" effort="1000" lower="${-pi/2}" upper="${pi}" />
     <dynamics damping = "0.7"/>
