@@ -23,7 +23,7 @@ alice_2_robot:
 
   l_knee_pitch_position:
     type: effort_controllers/JointPositionController
-    joint: leg_knee_l
+    joint: l_knee_pitch
     pid: {p: 7500.0, i: 0.1, d: 100.0}
 
   l_ankle_pitch_position:
@@ -66,6 +66,38 @@ alice_2_robot:
     type: effort_controllers/JointPositionController
     joint: r_ankle_roll
     pid: {p: 7500.0, i: 0.1, d: 100.0}
+
+  # ARM ---------------------------------------
+  l_shoulder_pitch_position:
+    type: effort_controllers/JointPositionController
+    joint: l_shoulder_pitch
+    pid: {p: 7500.0, i: 0.1, d: 100.0} 
+
+  r_shoulder_pitch_position:
+    type: effort_controllers/JointPositionController
+    joint: r_shoulder_pitch
+    pid: {p: 7500.0, i: 0.1, d: 100.0} 
+
+  l_shoulder_roll_position:
+    type: effort_controllers/JointPositionController
+    joint: l_shoulder_roll
+    pid: {p: 7500.0, i: 0.1, d: 100.0} 
+
+  r_shoulder_roll_position:
+    type: effort_controllers/JointPositionController
+    joint: r_shoulder_roll
+    pid: {p: 7500.0, i: 0.1, d: 100.0} 
+
+  l_elbow_pitch_position:
+    type: effort_controllers/JointPositionController
+    joint: l_elbow_pitch
+    pid: {p: 7500.0, i: 0.1, d: 100.0} 
+
+  r_elbow_pitch_position:
+    type: effort_controllers/JointPositionController
+    joint: r_elbow_pitch
+    pid: {p: 7500.0, i: 0.1, d: 100.0} 
+
 
 
 

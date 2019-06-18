@@ -90,6 +90,26 @@ alice_1_robot:
     joint: r_shoulder_pitch
     pid: {p: 7500.0, i: 0.1, d: 100.0} 
 
+  l_shoulder_roll_position:
+    type: effort_controllers/JointPositionController
+    joint: l_shoulder_roll
+    pid: {p: 7500.0, i: 0.1, d: 100.0} 
+
+  r_shoulder_roll_position:
+    type: effort_controllers/JointPositionController
+    joint: r_shoulder_roll
+    pid: {p: 7500.0, i: 0.1, d: 100.0} 
+
+  l_elbow_pitch_position:
+    type: effort_controllers/JointPositionController
+    joint: l_elbow_pitch
+    pid: {p: 7500.0, i: 0.1, d: 100.0} 
+
+  r_elbow_pitch_position:
+    type: effort_controllers/JointPositionController
+    joint: r_elbow_pitch
+    pid: {p: 7500.0, i: 0.1, d: 100.0} 
+
 
 
 

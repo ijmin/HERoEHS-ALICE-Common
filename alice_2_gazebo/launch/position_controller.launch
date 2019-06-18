@@ -19,6 +19,12 @@
 							  r_ankle_pitch_position
 							  l_ankle_roll_position
  							  r_ankle_roll_position
+                                                          l_shoulder_pitch_position
+                                                          r_shoulder_pitch_position
+                                                          l_shoulder_roll_position
+                                                          r_shoulder_roll_position
+                                                          l_elbow_pitch_position
+                                                          r_elbow_pitch_position
 							  "/>
 
 </launch>

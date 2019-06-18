@@ -225,7 +225,7 @@
       <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />      
     </inertial>
   </link>
-
+<!-- left arm --> 
 <!-- l_shoulder_pitch --> 
 
   <joint name="l_shoulder_pitch" type="revolute">
@@ -271,6 +271,95 @@
     </inertial>
   </link>
 
+
+  <joint name="l_shoulder_roll" type="revolute">
+    <parent link="l_shoulder_pitch_link"/>
+    <child link="l_shoulder_roll_link"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <limit velocity="6.5" effort="1000" lower="${-pi/2}" upper="${pi}" />
+    <dynamics damping = "0.7"/>
+  </joint>
+
+  <transmission name="l_shoulder_roll_tran">
+     <type>transmission_interface/SimpleTransmission</type>
+     <joint name="l_shoulder_roll">
+       <hardwareInterface>EffortJointInterface</hardwareInterface>
+     </joint>
+     <actuator name="l_shoulder_roll_motor">
+       <hardwareInterface>EffortJointInterface</hardwareInterface>
+       <mechanicalReduction>1</mechanicalReduction>
+     </actuator>
+  </transmission>
+
+  <link name="l_shoulder_roll_link">
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+          <mesh filename="package://alice_1_description/meshes/prt_hum_fb_3_elbow_l.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+    </collision>
+
+    <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://alice_1_description/meshes/prt_hum_fb_3_elbow_l.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+        <material name="red"/>
+    </visual>
+
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>      
+      <mass value="1"/>
+      <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />      
+    </inertial>
+  </link>
+
+ <joint name="l_elbow_pitch" type="revolute">
+    <parent link="l_shoulder_roll_link"/>
+    <child link="l_elbow_pitch_link"/>
+    <origin xyz="0 0 -0.27" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit velocity="6.5" effort="1000" lower="${-pi/2}" upper="${pi}" />
+    <dynamics damping = "0.7"/>
+  </joint>
+
+  <transmission name="l_elbow_pitch_tran">
+     <type>transmission_interface/SimpleTransmission</type>
+     <joint name="l_elbow_pitch">
+       <hardwareInterface>EffortJointInterface</hardwareInterface>
+     </joint>
+     <actuator name="l_elbow_pitch_motor">
+       <hardwareInterface>EffortJointInterface</hardwareInterface>
+       <mechanicalReduction>1</mechanicalReduction>
+     </actuator>
+  </transmission>
+
+  <link name="l_elbow_pitch_link">
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+          <mesh filename="package://alice_1_description/meshes/prt_hum_fb_3_elbo_2_l.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+    </collision>
+
+    <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://alice_1_description/meshes/prt_hum_fb_3_elbo_2_l.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+        <material name="red"/>
+    </visual>
+
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>      
+      <mass value="1"/>
+      <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />      
+    </inertial>
+  </link>
+
+
+<!-- right arm -->
 <!-- r_shoulder_pitch --> 
 
  <joint name="r_shoulder_pitch" type="revolute">
@@ -305,6 +394,92 @@
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
           <mesh filename="package://alice_1_description/meshes/asm_hum_fb_3_shr_r1.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+        <material name="red"/>
+    </visual>
+
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>      
+      <mass value="1"/>
+      <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />      
+    </inertial>
+  </link>
+
+ <joint name="r_shoulder_roll" type="revolute">
+    <parent link="r_shoulder_pitch_link"/>
+    <child link="r_shoulder_roll_link"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <limit velocity="6.5" effort="1000" lower="${-pi/2}" upper="${pi}" />
+    <dynamics damping = "0.7"/>
+  </joint>
+
+  <transmission name="r_shoulder_roll_tran">
+     <type>transmission_interface/SimpleTransmission</type>
+     <joint name="r_shoulder_roll">
+       <hardwareInterface>EffortJointInterface</hardwareInterface>
+     </joint>
+     <actuator name="r_shoulder_roll_motor">
+       <hardwareInterface>EffortJointInterface</hardwareInterface>
+       <mechanicalReduction>1</mechanicalReduction>
+     </actuator>
+  </transmission>
+
+  <link name="r_shoulder_roll_link">
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+          <mesh filename="package://alice_1_description/meshes/prt_hum_fb_3_elbow_l.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+    </collision>
+
+    <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://alice_1_description/meshes/prt_hum_fb_3_elbow_l.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+        <material name="red"/>
+    </visual>
+
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>      
+      <mass value="1"/>
+      <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />      
+    </inertial>
+  </link>
+
+ <joint name="r_elbow_pitch" type="revolute">
+    <parent link="r_shoulder_roll_link"/>
+    <child link="r_elbow_pitch_link"/>
+    <origin xyz="0 0 -0.27" rpy="0 0 0"/>
+    <axis xyz="0 -1 0"/>
+    <limit velocity="6.5" effort="1000" lower="${-pi/2}" upper="${pi}" />
+    <dynamics damping = "0.7"/>
+  </joint>
+
+  <transmission name="r_elbow_pitch_tran">
+     <type>transmission_interface/SimpleTransmission</type>
+     <joint name="r_elbow_pitch">
+       <hardwareInterface>EffortJointInterface</hardwareInterface>
+     </joint>
+     <actuator name="r_elbow_pitch_motor">
+       <hardwareInterface>EffortJointInterface</hardwareInterface>
+       <mechanicalReduction>1</mechanicalReduction>
+     </actuator>
+  </transmission>
+
+  <link name="r_elbow_pitch_link">
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+          <mesh filename="package://alice_1_description/meshes/prt_hum_fb_3_elbo_2_l.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+    </collision>
+
+    <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://alice_1_description/meshes/prt_hum_fb_3_elbo_2_l.stl" scale="0.001 0.001 0.001"/>
         </geometry>
         <material name="red"/>
     </visual>
